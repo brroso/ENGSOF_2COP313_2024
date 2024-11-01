@@ -27,9 +27,9 @@ public class Emprestimo {
     public Emprestimo emprestar(List<Livro> livros) {
         //Para o numero de livros a ser emprestado
         for (int i = 0; i < livros.size(); i++) {
-			item.add(new Item(livros.get(i)));
-			emprestimo += 1;
-		}
+            item.add(new Item(livros.get(i)));
+            emprestimo += 1;
+        }
 
         CalculaDataDevolucao();
         return this;
@@ -44,19 +44,23 @@ public class Emprestimo {
             if (dataPrevista.compareTo(data_aux) < 0)
                 dataPrevista = data_aux;
         }
-        if (item.size() > 2) {
-            int tam = item.size() - 2;
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(dataPrevista);
-            calendar.add(Calendar.DATE, (tam * 2));
-            dataPrevista = calendar.getTime();
-        }
+
+        dataPrevista = this.AddDias(dataPrevista);
+
         for (int j = 0; j < item.size(); j++)
             item.get(j).setDataDevolucao(dataPrevista);
 
         return dataPrevista;
-
     }
 
-
+    private Date AddDias(Date data) {
+        if (item.size() > 2) {
+            int tam = item.size() - 2;
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(data);
+            calendar.add(Calendar.DATE, (tam * 2));
+            return calendar.getTime();
+        }
+        return data;
+    }
 }
