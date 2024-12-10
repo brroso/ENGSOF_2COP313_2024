@@ -40,22 +40,23 @@ public class EmprestimoController {
             Date hoje = new Date();
             Emprestimo emprestimo = emprestimoDAO.getEmprestimoById(id);
             if (emprestimo != null) {
+                System.out.println(hoje + "   " + emprestimo.getDataPrevista());
                 if (emprestimo.getDataPrevista().before(hoje)) {
                     long diferencaEmMilissegundos = hoje.getTime() - emprestimo.getDataPrevista().getTime();
                     long diasDiff = diferencaEmMilissegundos / (1000 * 60 * 60 * 24);
 
                     System.out.println("O empréstimo está atrasado em " + diasDiff + " dias.");
-                    alunoController.criaDebitoAluno(emprestimo.getRAAluno(), 4*diasDiff);
+                    alunoController.criaDebitoAluno(emprestimo.getRAAluno(), 4 * diasDiff);
                 } else {
                     System.out.println("Devolução no prazo.");
                 }
-
                 emprestimoDAO.excluirById(id);
             } else {
-                System.out.println("Empréstimo não encontrado");
+                System.out.println("Empréstimo não encontrado.");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Erro ao acessar o banco de dados: " + e.getMessage());
+            throw new RuntimeException("Erro ao finalizar empréstimo.", e);
         }
     }
 

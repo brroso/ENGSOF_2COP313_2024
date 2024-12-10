@@ -57,6 +57,9 @@ public class EmprestimoDAO {
                 if (rs.next()) {
                     Emprestimo emprestimo = new Emprestimo(rs.getInt("ra_aluno"));
                     emprestimo.setId(rs.getInt("id"));
+                    emprestimo.setRAAluno(rs.getInt("ra_aluno"));
+                    emprestimo.setDataEmprestimo(rs.getDate("data_emprestimo"));
+                    emprestimo.setDataPrevista(rs.getDate("data_prevista"));
                     return emprestimo;
                 }
             }
