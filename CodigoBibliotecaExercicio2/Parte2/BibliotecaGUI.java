@@ -42,6 +42,9 @@ public class BibliotecaGUI extends JFrame {
         // Aba Gerenciar Livros
         tabbedPane.addTab("Gerenciar Livros", criarPainelGerenciarLivrosETitulos());
 
+        // Aba Devolver Emprestimo
+        tabbedPane.addTab("Devolver Livro", criarPainelGerenciarEmprestimos());
+
         add(tabbedPane, BorderLayout.CENTER);
 
     }
@@ -81,6 +84,47 @@ public class BibliotecaGUI extends JFrame {
 
         return painelEmprestar;
     }
+
+    private JPanel criarPainelGerenciarEmprestimos() {
+        JPanel painelGerenciarEmprestimos = new JPanel(new BorderLayout());
+
+        JTable tabelaEmprestimos = new JTable();
+        preencherTabelaEmprestimos(tabelaEmprestimos);
+
+        JScrollPane scrollPane = new JScrollPane(tabelaEmprestimos);
+        painelGerenciarEmprestimos.add(scrollPane, BorderLayout.CENTER);
+
+        JPanel painelExclusao = new JPanel(new GridLayout(1, 3));
+        painelExclusao.add(new JLabel("ID do Empréstimo a excluir:"));
+        JTextField idExcluirField = new JTextField();
+        painelExclusao.add(idExcluirField);
+
+        JButton excluirButton = new JButton("Excluir");
+        excluirButton.addActionListener(e -> {
+            String idText = idExcluirField.getText();
+            if (!idText.isEmpty()) {
+                try {
+                    int id = Integer.parseInt(idText);
+                    emprestimoController.finalizaEmprestimo(id);
+                    preencherTabelaEmprestimos(tabelaEmprestimos);
+                    idExcluirField.setText("");
+                    JOptionPane.showMessageDialog(painelGerenciarEmprestimos, "Empréstimo excluído com sucesso!");
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(painelGerenciarEmprestimos, "Por favor, insira um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(painelGerenciarEmprestimos, "Erro ao excluir empréstimo: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(painelGerenciarEmprestimos, "O campo de ID está vazio.", "Erro", JOptionPane.WARNING_MESSAGE);
+            }
+        });
+        painelExclusao.add(excluirButton);
+
+        painelGerenciarEmprestimos.add(painelExclusao, BorderLayout.SOUTH);
+
+        return painelGerenciarEmprestimos;
+    }
+
 
 
     private void preencherTabelaEmprestimos(JTable tabelaEmprestimos) {

@@ -2,6 +2,7 @@ package src;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class EmprestimoController {
@@ -31,6 +32,30 @@ public class EmprestimoController {
             return emprestimoItemDAO.getEmprestimoItemsByEmprestimoId(e.id);
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
+        }
+    }
+
+    public void finalizaEmprestimo(int id) {
+        try {
+            Date hoje = new Date();
+            Emprestimo emprestimo = emprestimoDAO.getEmprestimoById(id);
+            if (emprestimo != null) {
+                if (emprestimo.getDataPrevista().before(hoje)) {
+                    long diferencaEmMilissegundos = hoje.getTime() - emprestimo.getDataPrevista().getTime();
+                    long diasDiff = diferencaEmMilissegundos / (1000 * 60 * 60 * 24);
+
+                    System.out.println("O empréstimo está atrasado em " + diasDiff + " dias.");
+                    alunoController.criaDebitoAluno(emprestimo.getRAAluno(), 4*diasDiff);
+                } else {
+                    System.out.println("Devolução no prazo.");
+                }
+
+                emprestimoDAO.excluirById(id);
+            } else {
+                System.out.println("Empréstimo não encontrado");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

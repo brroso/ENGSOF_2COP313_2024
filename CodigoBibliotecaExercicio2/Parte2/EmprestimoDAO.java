@@ -63,4 +63,23 @@ public class EmprestimoDAO {
         }
         return null;
     }
+
+    public void excluirById(int id) throws SQLException {
+        String sql = "DELETE FROM emprestimo WHERE id = ?";
+
+        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Empréstimo com ID " + id + " excluído com sucesso.");
+            } else {
+                System.out.println("Nenhum empréstimo encontrado com o ID " + id + ".");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir o empréstimo: " + e.getMessage());
+            throw e;
+        }
+    }
 }

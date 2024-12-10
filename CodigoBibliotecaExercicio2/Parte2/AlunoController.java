@@ -56,4 +56,13 @@ public class AlunoController {
         }
     }
 
+    public void criaDebitoAluno(int ra, float valor) {
+        try {
+            Debito debito = new Debito(ra, valor);
+            debitoDAO.inserir(debito);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
