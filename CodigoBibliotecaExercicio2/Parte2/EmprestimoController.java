@@ -1,5 +1,6 @@
 package src;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,30 @@ public class EmprestimoController {
     private AlunoController alunoController = new AlunoController();
     private EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
     private EmprestimoItemDAO emprestimoItemDAO = new EmprestimoItemDAO();
+
+    public List<Emprestimo> getEmprestimos() {
+        try {
+            List<Emprestimo> emprestimos = emprestimoDAO.listarTodos();
+
+            for (int i = 0; i < emprestimos.size(); i++) {
+                Emprestimo emprestimo = emprestimos.get(i);
+                List<EmprestimoItem> itens = preencheItemEmprestimo(emprestimo);
+                emprestimo.setItem(itens);
+            }
+
+            return emprestimos;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<EmprestimoItem> preencheItemEmprestimo(Emprestimo e) {
+        try {
+            return emprestimoItemDAO.getEmprestimoItemsByEmprestimoId(e.id);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 
     public Emprestimo emprestar(int aluno, int[] codigos, int num) {
         boolean retorno = true;
@@ -30,7 +55,10 @@ public class EmprestimoController {
                 List<Livro> livros = new ArrayList<>();
                 for (int i = 0; i < num; i++) {
                     Livro l = livroController.getLivroById(codigos[i]);
-                    if (l.verificaLivro()) {
+                    if (l == null) {
+                        continue;
+                    }
+                    if  (l.verificaLivro()) {
                         livros.add(l);
                     }
                 }

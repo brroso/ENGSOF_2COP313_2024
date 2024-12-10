@@ -18,10 +18,15 @@ public class Emprestimo {
         this.ra_aluno = RA;
     }
 
+    public java.sql.Date getDataEmprestimoSql() {
+        return new java.sql.Date(dataEmprestimo.getTime());
+    }
+
     public java.sql.Date getDataEmprestimo() {
         return (java.sql.Date) dataEmprestimo;
     }
-    public java.sql.Date getDataPrevista() { return (java.sql.Date) dataPrevista; }
+    public java.sql.Date getDataPrevistaSql() { return new java.sql.Date(dataPrevista.getTime()); }
+    public Date getDataPrevista() { return dataPrevista; }
     public List<EmprestimoItem> getItem() {return item; }
     public int getRAAluno() { return ra_aluno; }
     public int getId() { return id; }

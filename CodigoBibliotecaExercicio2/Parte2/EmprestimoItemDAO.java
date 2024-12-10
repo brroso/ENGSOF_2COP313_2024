@@ -67,19 +67,20 @@ public class EmprestimoItemDAO {
         return null;
     }
 
-    public EmprestimoItem getEmprestimoItemByEmprestimoId(int id) throws SQLException {
+    public List<EmprestimoItem> getEmprestimoItemsByEmprestimoId(int id) throws SQLException {
         String sql = "SELECT * FROM emprestimo_item WHERE id_emprestimo = ?";
+        List<EmprestimoItem> emprestimoItems = new ArrayList<>();
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
+                while (rs.next()) {
                     EmprestimoItem emprestimoItem = new EmprestimoItem(livroDAO.getLivroById(rs.getInt("id_livro")), emprestimoDAO.getEmprestimoById(rs.getInt("id_emprestimo")));
                     emprestimoItem.setId(rs.getInt("id"));
-                    return emprestimoItem;
+                    emprestimoItems.add(emprestimoItem);
                 }
             }
         }
-        return null;
+        return emprestimoItems;
     }
 
     public boolean verificaDebitoByRA(int RA) throws SQLException {

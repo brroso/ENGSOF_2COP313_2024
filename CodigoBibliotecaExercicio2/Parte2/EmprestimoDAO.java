@@ -19,12 +19,15 @@ public class EmprestimoDAO {
         String sqlEmprestimo = "INSERT INTO emprestimo (ra_aluno, data_emprestimo, data_prevista) VALUES (?, ?, ?)";
         try (PreparedStatement stmtEmprestimo = conexao.prepareStatement(sqlEmprestimo, Statement.RETURN_GENERATED_KEYS)) {
             stmtEmprestimo.setInt(1, emprestimo.getRAAluno());
-            stmtEmprestimo.setDate(2, emprestimo.getDataEmprestimo());
-            stmtEmprestimo.setDate(3, emprestimo.getDataPrevista());
+            stmtEmprestimo.setDate(2, emprestimo.getDataEmprestimoSql());
+            stmtEmprestimo.setDate(3, emprestimo.getDataPrevistaSql());
             stmtEmprestimo.executeUpdate();
 
             ResultSet generatedKeys = stmtEmprestimo.getGeneratedKeys();
-            emprestimo.setId(generatedKeys.getInt("id"));
+
+            if (generatedKeys.next()) {  // Movemos para o primeiro resultado
+                emprestimo.setId(generatedKeys.getInt(1));  // Use o índice correto
+            }
 
             return emprestimo;
         }
@@ -40,6 +43,7 @@ public class EmprestimoDAO {
                 emprestimo.setId(rs.getInt("id"));
                 emprestimo.setDataEmprestimo(rs.getDate("data_emprestimo"));
                 emprestimo.setDataPrevista(rs.getDate("data_prevista"));
+                emprestimos.add(emprestimo);
             }
         }
         return emprestimos;

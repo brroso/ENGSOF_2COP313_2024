@@ -1,5 +1,6 @@
 package src;
 
+import javax.sound.midi.SysexMessage;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -64,19 +65,52 @@ public class BibliotecaGUI extends JFrame {
             }
         });
 
-        resultadoArea = new JTextArea();
-        resultadoArea.setEditable(false);
-        painelEmprestar.add(new JScrollPane(resultadoArea), BorderLayout.EAST);
-
+        JPanel botaoPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton emprestarButton = new JButton("Emprestar Livros");
         emprestarButton.addActionListener(e -> emprestarLivros());
-        painelEmprestar.add(emprestarButton, BorderLayout.SOUTH);
+        botaoPanel.add(emprestarButton);
+
+        painelEmprestar.add(botaoPanel, BorderLayout.PAGE_END);
+
+        painelEmprestar.revalidate();
+        painelEmprestar.repaint();
 
         return painelEmprestar;
     }
 
+
+    private void preencherTabelaEmprestimos(JTable tabelaEmprestimos) {
+        List<Emprestimo> emprestimos = emprestimoController.getEmprestimos();
+
+        String[] colunas = {"ID", "RA do Aluno", "Data de Empréstimo", "Data de Devolução", "Livro Emprestado"};
+
+        int numLinhas = 0;
+        for (Emprestimo emprestimo : emprestimos) {
+            numLinhas += emprestimo.getItem().size();
+        }
+
+        String[][] dados = new String[numLinhas][5];
+        int count = 0;
+
+        for (Emprestimo emprestimo : emprestimos) {
+            for (EmprestimoItem item : emprestimo.getItem()) {
+                dados[count][0] = String.valueOf(emprestimo.getId());
+                dados[count][1] = String.valueOf(emprestimo.getRAAluno());
+                dados[count][2] = emprestimo.getDataEmprestimo().toString();
+                dados[count][3] = emprestimo.getDataPrevista().toString();
+                dados[count][4] = item.getLivro().getTitulo().getNome();
+                count++;
+            }
+        }
+
+        tabelaEmprestimos.setModel(new javax.swing.table.DefaultTableModel(dados, colunas));
+        tabelaEmprestimos.revalidate();
+        tabelaEmprestimos.repaint();
+    }
+
+
     private JPanel criarPainelGerenciarAutores() {
-        JPanel painelGerenciar = new JPanel(new GridLayout(1, 2)); // Divide o painel em duas colunas
+        JPanel painelGerenciar = new JPanel(new GridLayout(1, 2));
 
         JPanel painelAreas = new JPanel(new BorderLayout());
         painelAreas.add(new JLabel("Gerenciar Áreas"), BorderLayout.NORTH);
@@ -248,7 +282,7 @@ public class BibliotecaGUI extends JFrame {
 
         atualizarTabelaAlunos(this.tabelaAlunos);
 
-        return painelGerenciar;
+            return painelGerenciar;
     }
 
     private void atualizarTabelaAlunos(JTable tabela) {

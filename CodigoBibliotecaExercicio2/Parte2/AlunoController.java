@@ -9,6 +9,7 @@ public class AlunoController {
 
     public AlunoController() {
         alunoDAO = new AlunoDAO();
+        debitoDAO = new DebitoDAO();
     }
 
     public void cadastrarAluno(String nome, String email) {

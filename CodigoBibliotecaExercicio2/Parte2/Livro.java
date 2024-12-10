@@ -15,6 +15,7 @@ public class Livro {
     public boolean getExemplarBiblioteca() { return this.exemplarBiblioteca; }
 
     public int getTituloId() { return titulo.getId(); }
+    public Titulo getTitulo() { return titulo; }
 
     public int getPrazo() { return titulo.getPrazo(); }
 

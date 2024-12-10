@@ -58,7 +58,7 @@ public class TituloDAO {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    Titulo titulo = new Titulo(rs.getInt("prazo"), rs.getString("nome"), rs.getInt("idAutor"), rs.getInt("idArea"));
+                    Titulo titulo = new Titulo(rs.getInt("prazo"), rs.getString("nome"), rs.getInt("id_autor"), rs.getInt("id_area"));
                     titulo.setId(rs.getInt("id"));
                     return titulo;
                 }
