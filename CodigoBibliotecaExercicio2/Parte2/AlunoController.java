@@ -5,6 +5,7 @@ import java.util.List;
 
 public class AlunoController {
     private AlunoDAO alunoDAO;
+    private DebitoDAO debitoDAO;
 
     public AlunoController() {
         alunoDAO = new AlunoDAO();
@@ -41,6 +42,14 @@ public class AlunoController {
     public void excluirAlunoByRA(int ra){
         try {
             alunoDAO.excluir(ra);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean verificaDebitoByRA(int ra){
+        try {
+            return debitoDAO.verificaDebitoByRA(ra);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

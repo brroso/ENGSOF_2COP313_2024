@@ -42,13 +42,4 @@ public class DebitoController {
             throw new RuntimeException(e);
         }
     }
-
-    public boolean verificaDebitoByRA(int ra){
-        try {
-            return debitoDAO.verificaDebitoByRA(ra);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }

@@ -23,7 +23,7 @@ public class Livro {
     public int getId() { return this.id; }
 
     public boolean verificaLivro() {
-        return exemplarBiblioteca;
+        return !exemplarBiblioteca;
     }
 
 }

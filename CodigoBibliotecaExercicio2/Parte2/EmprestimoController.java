@@ -6,8 +6,6 @@ import java.util.List;
 public class EmprestimoController {
     private LivroController livroController = new LivroController();
     private AlunoController alunoController = new AlunoController();
-    private DebitoController debitoController = new DebitoController();
-
     private EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
     private EmprestimoItemDAO emprestimoItemDAO = new EmprestimoItemDAO();
 
@@ -22,7 +20,7 @@ public class EmprestimoController {
 
             System.out.println("Aluno encontrado: " + a.getNome());
 
-            if (debitoController.verificaDebitoByRA(a.getRA())) {
+            if (alunoController.verificaDebitoByRA(a.getRA())) {
                 System.out.println("Aluno em Débito");
                 retorno = false;
             }
@@ -32,7 +30,7 @@ public class EmprestimoController {
                 List<Livro> livros = new ArrayList<>();
                 for (int i = 0; i < num; i++) {
                     Livro l = livroController.getLivroById(codigos[i]);
-                    if (!l.verificaLivro()) {
+                    if (l.verificaLivro()) {
                         livros.add(l);
                     }
                 }
