@@ -10,9 +10,12 @@ public class Emprestimo {
     Date dataEmprestimo = new Date();
     Date dataPrevista = new Date();
     Date data_aux = new Date();
-    //Cada emprestimo tem um conjutno de itens
     List<Item> item = new ArrayList<Item>();
-    int emprestimo = 0;
+    int ra_aluno;
+
+    public Emprestimo(int RA) {
+        this.ra_aluno = RA;
+    }
 
     public Date getDataEmprestimo() {
         return dataEmprestimo;
@@ -22,13 +25,9 @@ public class Emprestimo {
         this.dataEmprestimo = dataEmprestimo;
     }
 
-
-    // Metodo respons�vel por realizar o empr�stimo
     public Emprestimo emprestar(List<Livro> livros) {
-        //Para o numero de livros a ser emprestado
         for (int i = 0; i < livros.size(); i++) {
             item.add(new Item(livros.get(i)));
-            emprestimo += 1;
         }
 
         CalculaDataDevolucao();

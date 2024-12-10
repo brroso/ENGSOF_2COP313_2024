@@ -2,15 +2,23 @@ package src;
 
 public class Debito {
     int codigoAluno;
+    Float valor;
+    int id;
 
-    public Debito(int aluno) {
+    public Debito(int aluno, Float valor) {
         this.codigoAluno = aluno;
+        this.valor = valor;
     }
 
-    public boolean verificaDebito() {
-        //codigo aleatorio para definir se o aluno tem d�bito
-        //� necess�rio fazer a verifica��o de forma persistente
-        return this.codigoAluno != 4;
-    }
+    public int getId() { return this.id; }
 
+    public int getCodigoAluno() { return this.codigoAluno; }
+
+    public Float getValor() { return this.valor; }
+
+    public void setId(int id) { this.id = id; }
+
+    public void setCodigoAluno(int codigoAluno) { this.codigoAluno = codigoAluno; }
+
+    public void setValor(Float valor) { this.valor = valor; }
 }
