@@ -319,7 +319,7 @@ public class BibliotecaGUI extends JFrame {
             dados[i][1] = livrosEmprestados.item.get(i).livro.titulo.nome;
             dados[i][2] = livrosEmprestados.item.get(i).livro.titulo.area.nome;
             dados[i][3] = livrosEmprestados.item.get(i).livro.titulo.autor.nome;
-            dados[i][4] = String.valueOf(livrosEmprestados.item.get(i).getDataDevolucao());
+            dados[i][4] = String.valueOf(livrosEmprestados.getDataPrevista());
         }
 
         JTable tabela = new JTable(dados, colunas);

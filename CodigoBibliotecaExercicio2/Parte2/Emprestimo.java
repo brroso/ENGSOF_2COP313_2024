@@ -10,27 +10,37 @@ public class Emprestimo {
     Date dataEmprestimo = new Date();
     Date dataPrevista = new Date();
     Date data_aux = new Date();
-    List<Item> item = new ArrayList<Item>();
+    List<EmprestimoItem> item = new ArrayList<EmprestimoItem>();
     int ra_aluno;
+    int id;
 
     public Emprestimo(int RA) {
         this.ra_aluno = RA;
     }
 
-    public Date getDataEmprestimo() {
-        return dataEmprestimo;
+    public java.sql.Date getDataEmprestimo() {
+        return (java.sql.Date) dataEmprestimo;
     }
+    public java.sql.Date getDataPrevista() { return (java.sql.Date) dataPrevista; }
+    public List<EmprestimoItem> getItem() {return item; }
+    public int getRAAluno() { return ra_aluno; }
+    public int getId() { return id; }
 
+    public void setRAAluno(int ra) { this.ra_aluno = ra; }
+    public void setItem(List<EmprestimoItem> item) { this.item = item; }
+    public void setDataPrevista(Date dataPrevista) { this.dataPrevista = dataPrevista; }
     public void setDataEmprestimo(Date dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
+    public void setId(int id) { this.id = id; }
 
     public Emprestimo emprestar(List<Livro> livros) {
         for (int i = 0; i < livros.size(); i++) {
-            item.add(new Item(livros.get(i)));
+            item.add(new EmprestimoItem(livros.get(i), this));
         }
 
         CalculaDataDevolucao();
+        this.dataEmprestimo = new Date();
         return this;
 
     }
@@ -39,17 +49,14 @@ public class Emprestimo {
         Date date = new Date();
 
         for (int j = 0; j < item.size(); j++) {
-            data_aux = item.get(j).calculaDataDevolucao(date);
-            if (dataPrevista.compareTo(data_aux) < 0)
-                dataPrevista = data_aux;
+            this.data_aux = item.get(j).calculaDataDevolucao(date);
+            if (this.dataPrevista.compareTo(this.data_aux) < 0)
+                this.dataPrevista = this.data_aux;
         }
 
-        dataPrevista = this.AddDias(dataPrevista);
+        this.dataPrevista = this.AddDias(this.dataPrevista);
 
-        for (int j = 0; j < item.size(); j++)
-            item.get(j).setDataDevolucao(dataPrevista);
-
-        return dataPrevista;
+        return this.dataPrevista;
     }
 
     private Date AddDias(Date data) {

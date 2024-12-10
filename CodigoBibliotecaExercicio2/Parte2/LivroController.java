@@ -10,9 +10,9 @@ public class LivroController {
         livroDAO = new LivroDAO();
     }
 
-    public void cadastrarLivro(int idTitulo, boolean exemplarBiblioteca) {
+    public void cadastrarLivro(Titulo titulo, boolean exemplarBiblioteca) {
         try {
-            Livro livro = new Livro(idTitulo, exemplarBiblioteca);
+            Livro livro = new Livro(titulo, exemplarBiblioteca);
             livroDAO.inserir(livro);
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao cadastrar livro: " + e.getMessage());

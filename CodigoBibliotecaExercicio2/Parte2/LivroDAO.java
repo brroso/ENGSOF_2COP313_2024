@@ -6,6 +6,7 @@ import java.util.List;
 
 public class LivroDAO {
     private Connection conexao;
+    private TituloDAO tituloDAO = new TituloDAO();
 
     public LivroDAO() {
         try {
@@ -42,7 +43,7 @@ public class LivroDAO {
         try (Statement stmt = conexao.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                Livro livro = new Livro(rs.getInt("id_titulo"), rs.getBoolean("exemplar_biblioteca"));
+                Livro livro = new Livro(tituloDAO.getTituloById(rs.getInt("id_titulo")), rs.getBoolean("exemplar_biblioteca"));
                 livro.setId(rs.getInt("id"));
                 livros.add(livro);
             }
@@ -56,7 +57,7 @@ public class LivroDAO {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    Livro livro = new Livro(rs.getInt("id_titulo"), rs.getBoolean("exemplar_biblioteca"));
+                    Livro livro = new Livro(tituloDAO.getTituloById(rs.getInt("id_titulo")), rs.getBoolean("exemplar_biblioteca"));
                     livro.setId(rs.getInt("id"));
                     return livro;
                 }

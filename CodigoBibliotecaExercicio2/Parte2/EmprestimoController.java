@@ -8,8 +8,8 @@ public class EmprestimoController {
     private AlunoController alunoController = new AlunoController();
     private DebitoController debitoController = new DebitoController();
 
-    public void inserir(Emprestimo emprestimo) {
-    }
+    private EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+    private EmprestimoItemDAO emprestimoItemDAO = new EmprestimoItemDAO();
 
     public Emprestimo emprestar(int aluno, int[] codigos, int num) {
         boolean retorno = true;
@@ -17,7 +17,7 @@ public class EmprestimoController {
             Aluno a = alunoController.getAlunoByRA(aluno);
             if (a == null) {
                 System.out.println("Aluno não encontrado");
-                return new Emprestimo(0); // Retorna um empréstimo vazio
+                return new Emprestimo(0);
             }
 
             System.out.println("Aluno encontrado: " + a.getNome());
@@ -38,8 +38,11 @@ public class EmprestimoController {
                 }
 
                 if (!livros.isEmpty()) {
-                    Emprestimo emprestimoFeito = e.emprestar(livros);
-                    this.inserir(emprestimoFeito);
+                    Emprestimo emprestimoFeito = emprestimoDAO.inserir(e.emprestar(livros));
+                    for (int i = 0; i < livros.size(); i++) {
+                        EmprestimoItem emprestimoItem = new EmprestimoItem(livros.get(i), emprestimoFeito);
+                        emprestimoItemDAO.inserir(emprestimoItem);
+                    }
                     return emprestimoFeito;
                 } else {
                     System.out.println("Nenhum livro disponível para empréstimo");
