@@ -208,23 +208,20 @@ public class BibliotecaGUI extends JFrame {
         JScrollPane scrollPane = new JScrollPane(this.tabelaAlunos);
 
         cadastrarButton.addActionListener(e -> {
-            String raText = raField.getText().trim();
             String nome = nomeField.getText().trim();
             String email = emailField.getText().trim();
 
-            if (raText.isEmpty() || nome.isEmpty() || email.isEmpty()) {
+            if (nome.isEmpty() || email.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Todos os campos são obrigatórios.");
             } else {
                 try {
-                    int ra = Integer.parseInt(raText);
                     alunoController.cadastrarAluno(nome, email);
                     JOptionPane.showMessageDialog(this, "Aluno cadastrado com sucesso!");
                     atualizarTabelaAlunos(this.tabelaAlunos);
-                    raField.setText("");
                     nomeField.setText("");
                     emailField.setText("");
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "RA deve ser um número válido.");
+                } catch (HeadlessException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });

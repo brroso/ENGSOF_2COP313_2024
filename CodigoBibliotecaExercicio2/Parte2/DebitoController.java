@@ -19,7 +19,7 @@ public class DebitoController {
         }
     }
 
-    public List<Debito> getAreas() {
+    public List<Debito> getDebitos() {
         try {
             return debitoDAO.listarTodos();
         } catch (SQLException e) {
@@ -45,7 +45,7 @@ public class DebitoController {
 
     public boolean verificaDebitoByRA(int ra){
         try {
-            return verificaDebitoByRA(ra);
+            return debitoDAO.verificaDebitoByRA(ra);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
