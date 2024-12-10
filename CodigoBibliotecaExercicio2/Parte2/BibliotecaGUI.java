@@ -1,6 +1,6 @@
 package src;
 
-import javax.sound.midi.SysexMessage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -9,11 +9,12 @@ public class BibliotecaGUI extends JFrame {
     private JTextField raField, numLivrosField;
     private JTextField[] codigoLivrosFields;
     private JPanel codigosPanel;
-    private JTextArea resultadoArea;
     private JTable tabelaAlunos = new JTable();
     private AutorController autorController = new AutorController();
     private AreaController areaController = new AreaController();
     private AlunoController alunoController = new AlunoController();
+    private TituloController tituloController = new TituloController();
+    private LivroController livroController = new LivroController();
     private EmprestimoController emprestimoController = new EmprestimoController();
 
 
@@ -37,6 +38,9 @@ public class BibliotecaGUI extends JFrame {
 
         // Aba Gerenciar Autores
         tabbedPane.addTab("Gerenciar Autores", criarPainelGerenciarAutores());
+
+        // Aba Gerenciar Livros
+        tabbedPane.addTab("Gerenciar Livros", criarPainelGerenciarLivrosETitulos());
 
         add(tabbedPane, BorderLayout.CENTER);
 
@@ -362,6 +366,130 @@ public class BibliotecaGUI extends JFrame {
 
         JOptionPane.showMessageDialog(this, panel, "Livros Emprestados", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    private JPanel criarPainelGerenciarLivrosETitulos() {
+        JPanel painelGerenciar = new JPanel(new GridLayout(1, 2));
+
+        // Painel de Títulos
+        JPanel painelTitulos = new JPanel(new BorderLayout());
+        painelTitulos.add(new JLabel("Gerenciar Títulos"), BorderLayout.NORTH);
+
+        JPanel formTitulos = new JPanel(new GridLayout(5, 2));
+        JTextField idTituloField = new JTextField();
+        JTextField nomeTituloField = new JTextField();
+        JTextField areaIdField = new JTextField();
+        JTextField prazoField = new JTextField();
+        JTextField autorIdField = new JTextField();
+
+        formTitulos.add(new JLabel("ID Título (Exclusão):"));
+        formTitulos.add(idTituloField);
+        formTitulos.add(new JLabel("Nome do Título:"));
+        formTitulos.add(nomeTituloField);
+        formTitulos.add(new JLabel("ID Área:"));
+        formTitulos.add(areaIdField);
+        formTitulos.add(new JLabel("Prazo:"));
+        formTitulos.add(prazoField);
+        formTitulos.add(new JLabel("ID Autor:"));
+        formTitulos.add(autorIdField);
+        painelTitulos.add(formTitulos, BorderLayout.CENTER);
+
+        JList<String> listaTitulos = new JList<>(getTitulos()); // Método para buscar títulos do banco
+        JScrollPane scrollTitulos = new JScrollPane(listaTitulos);
+        painelTitulos.add(scrollTitulos, BorderLayout.SOUTH);
+
+        JButton criarTituloButton = new JButton("Criar Título");
+        criarTituloButton.addActionListener(e -> {
+            tituloController.cadastrarTitulo(Integer.parseInt(prazoField.getText()), nomeTituloField.getText(), Integer.parseInt(autorIdField.getText()), Integer.parseInt(areaIdField.getText()));
+            atualizarListaTitulos(listaTitulos);
+        });
+
+        JButton excluirTituloButton = new JButton("Excluir Título");
+        excluirTituloButton.addActionListener(e -> {
+            tituloController.excluirTituloById(Integer.parseInt(idTituloField.getText()));
+            atualizarListaTitulos(listaTitulos);
+        });
+
+        JPanel botoesTitulo = new JPanel(new GridLayout(1, 2));
+        botoesTitulo.add(criarTituloButton);
+        botoesTitulo.add(excluirTituloButton);
+        painelTitulos.add(botoesTitulo, BorderLayout.NORTH);
+        painelGerenciar.add(painelTitulos);
+
+        // Painel de Livros
+        JPanel painelLivros = new JPanel(new BorderLayout());
+        painelLivros.add(new JLabel("Gerenciar Livros"), BorderLayout.NORTH);
+
+        JPanel formLivros = new JPanel(new GridLayout(3, 2));
+        JTextField idLivroField = new JTextField();
+        JTextField exemplarBibliotecaField = new JTextField(); // Campo booleano como texto
+        JTextField idTituloLivroField = new JTextField();
+
+        formLivros.add(new JLabel("ID Livro (Exclusão):"));
+        formLivros.add(idLivroField);
+        formLivros.add(new JLabel("Exemplar Biblioteca (true/false):"));
+        formLivros.add(exemplarBibliotecaField);
+        formLivros.add(new JLabel("ID Título:"));
+        formLivros.add(idTituloLivroField);
+        painelLivros.add(formLivros, BorderLayout.CENTER);
+
+        JList<String> listaLivros = new JList<>(getLivros()); // Método para buscar livros do banco
+        JScrollPane scrollLivros = new JScrollPane(listaLivros);
+        painelLivros.add(scrollLivros, BorderLayout.SOUTH);
+
+        JButton criarLivroButton = new JButton("Criar Livro");
+        criarLivroButton.addActionListener(e -> {
+            boolean exemplarBiblioteca = Boolean.parseBoolean(exemplarBibliotecaField.getText()); // Convertendo o texto para boolean
+            livroController.cadastrarLivro(tituloController.getTituloById(Integer.parseInt(idTituloLivroField.getText())), exemplarBiblioteca);
+            atualizarListaLivros(listaLivros);
+        });
+
+        JButton excluirLivroButton = new JButton("Excluir Livro");
+        excluirLivroButton.addActionListener(e -> {
+            livroController.excluirLivroById(Integer.parseInt(idLivroField.getText()));
+            atualizarListaLivros(listaLivros);
+        });
+
+        JPanel botoesLivro = new JPanel(new GridLayout(1, 2));
+        botoesLivro.add(criarLivroButton);
+        botoesLivro.add(excluirLivroButton);
+        painelLivros.add(botoesLivro, BorderLayout.NORTH);
+        painelGerenciar.add(painelLivros);
+
+        return painelGerenciar;
+    }
+
+
+    private String[] getTitulos() {
+        List<Titulo> titulos = tituloController.getTitulos();
+        String[] areasArray = new String[titulos.size()];
+
+        for (int i = 0; i < titulos.size(); i++) {
+            Titulo titulo = titulos.get(i);
+            areasArray[i] = titulo.getId() + " - " + titulo.getNome() + " - " + titulo.getPrazo() + " - " + titulo.getArea().getNome() + " - " + titulo.getAutor().getNome();
+        }
+        return areasArray;
+    }
+
+    private void atualizarListaTitulos(JList<String> listaLivros) {
+        listaLivros.setListData(getTitulos());
+    }
+
+    private String[] getLivros() {
+        List<Livro> livros = null;
+        livros = livroController.getLivros();
+        String[] autoresArray = new String[livros.size()];
+
+        for (int i = 0; i < livros.size(); i++) {
+            Livro livro = livros.get(i);
+            autoresArray[i] = livro.getId() + " - " + livro.getTitulo().getNome() + " - " + livro.getExemplarBiblioteca();
+        }
+        return autoresArray;
+    }
+
+    private void atualizarListaLivros(JList<String> listaLivros) {
+        listaLivros.setListData(getLivros());
+    }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new BibliotecaGUI().setVisible(true));

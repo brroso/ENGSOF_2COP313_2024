@@ -16,7 +16,7 @@ public class TituloDAO {
     }
 
     public void inserir(Titulo titulo) throws SQLException {
-        String sql = "INSERT INTO titulo (prazo, nome, id_autor, id_area) VALUES (?)";
+        String sql = "INSERT INTO titulo (prazo, nome, id_autor, id_area) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setInt(1, titulo.getPrazo());
             stmt.setString(2, titulo.getNome());
@@ -27,7 +27,7 @@ public class TituloDAO {
     }
 
     public boolean excluir(int id) throws SQLException {
-        String sql = "DELETE FROM autor WHERE id = ?";
+        String sql = "DELETE FROM titulo WHERE id = ?";
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();

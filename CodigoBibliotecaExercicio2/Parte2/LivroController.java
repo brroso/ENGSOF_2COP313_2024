@@ -19,7 +19,7 @@ public class LivroController {
         }
     }
 
-    public List<Livro> getLivross() {
+    public List<Livro> getLivros() {
         try {
             return livroDAO.listarTodos();
         } catch (SQLException e) {

@@ -17,7 +17,7 @@ public class LivroDAO {
     }
 
     public void inserir(Livro livro) throws SQLException {
-        String sql = "INSERT INTO livro (id_titulo, exemplar_biblioteca) VALUES (?)";
+        String sql = "INSERT INTO livro (id_titulo, exemplar_biblioteca) VALUES (?, ?)";
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setInt(1, livro.getTituloId());
             stmt.setBoolean(2,livro.getExemplarBiblioteca());
