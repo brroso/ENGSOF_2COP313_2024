@@ -10,6 +10,7 @@ public class EmprestimoController {
     private AlunoController alunoController = new AlunoController();
     private EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
     private EmprestimoItemDAO emprestimoItemDAO = new EmprestimoItemDAO();
+    private ConfiguracoesGlobais conf = ConfiguracoesGlobais.getInstancia();
 
     public List<Emprestimo> getEmprestimos() {
         try {
@@ -40,13 +41,12 @@ public class EmprestimoController {
             Date hoje = new Date();
             Emprestimo emprestimo = emprestimoDAO.getEmprestimoById(id);
             if (emprestimo != null) {
-                System.out.println(hoje + "   " + emprestimo.getDataPrevista());
                 if (emprestimo.getDataPrevista().before(hoje)) {
                     long diferencaEmMilissegundos = hoje.getTime() - emprestimo.getDataPrevista().getTime();
                     long diasDiff = diferencaEmMilissegundos / (1000 * 60 * 60 * 24);
 
                     System.out.println("O empréstimo está atrasado em " + diasDiff + " dias.");
-                    alunoController.criaDebitoAluno(emprestimo.getRAAluno(), 4 * diasDiff);
+                    alunoController.criaDebitoAluno(emprestimo.getRAAluno(), conf.getmultaValorDiario() * diasDiff);
                 } else {
                     System.out.println("Devolução no prazo.");
                 }

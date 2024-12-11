@@ -16,6 +16,7 @@ public class BibliotecaGUI extends JFrame {
     private TituloController tituloController = new TituloController();
     private LivroController livroController = new LivroController();
     private EmprestimoController emprestimoController = new EmprestimoController();
+    private ConfiguracoesGlobais conf = ConfiguracoesGlobais.getInstancia();
 
 
 
@@ -68,7 +69,24 @@ public class BibliotecaGUI extends JFrame {
 
         numLivrosField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent e) {
-                adicionarCamposCodigos();
+                try {
+                    int numLivros = Integer.parseInt(numLivrosField.getText());
+                    if (numLivros > conf.getEmprestimoMaxLivros()) {
+                        JOptionPane.showMessageDialog(painelEmprestar,
+                                "O número máximo de livros permitido é " + conf.getEmprestimoMaxLivros() + ".",
+                                "Erro",
+                                JOptionPane.ERROR_MESSAGE);
+                        numLivrosField.setText(""); // Limpa o campo para corrigir
+                    } else {
+                        adicionarCamposCodigos();
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(painelEmprestar,
+                            "Por favor, insira um número válido.",
+                            "Erro",
+                            JOptionPane.ERROR_MESSAGE);
+                    numLivrosField.setText("");
+                }
             }
         });
 
