@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f36bed7b-b900-454e-a2bf-f42e17464a29" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/postgresql_42_7_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodigoBibliotecaExercicio2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/Aluno.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/AlunoController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/AlunoDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/Area.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/AreaController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/AreaDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/Autor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/AutorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/AutorDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/BibliotecaGUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/ConfiguracoesGlobais.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/Debito.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/DebitoController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/DebitoDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/Emprestimo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/EmprestimoController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/EmprestimoDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/EmprestimoItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/EmprestimoItemDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/Livro.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/LivroController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/LivroDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/Titulo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/TituloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parte2/TituloDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/Aluno.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/AlunoController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/AlunoDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/Area.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/AreaController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/AreaDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/Autor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/AutorController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/AutorDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/BibliotecaGUI$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/BibliotecaGUI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/ConfiguracoesGlobais.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/Debito.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/DebitoController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/DebitoDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/Emprestimo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/EmprestimoController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/EmprestimoDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/EmprestimoItem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/EmprestimoItemDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/Livro.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/LivroController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/LivroDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/Titulo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/TituloController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodigoBibliotecaExercicio2/src/TituloDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Diagramas/Diagrama Comunicacao - Biblioteca.asta" beforeDir="false" afterPath="$PROJECT_DIR$/../Diagramas/Diagrama Comunicacao - Biblioteca.asta" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2nz76mrK8hgNlQXbR1SpYAyPAFb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/joao-/Documents/ENGSOF_2COP313_2024/Codigo_Biblioteca",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="src.BibliotecaGUI" />
+      <module name="CodigoBibliotecaExercicio2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f36bed7b-b900-454e-a2bf-f42e17464a29" name="Changes" comment="" />
+      <created>1729963878011</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729963878011</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
