@@ -5,19 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlunoDAO {
-    private Connection conexao;
-
-    public AlunoDAO() {
-        try {
-            this.conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/biblioteca", "aluno_user", "senha123");
-        } catch (SQLException e) {
-            System.out.println("Erro na conexão:" + e);
-        }
-    }
+    private static final String URL = "jdbc:postgresql://localhost:5432/biblioteca";
+    private static final String USER = "aluno_user";
+    private static final String PASSWORD = "senha123";
 
     public void inserir(Aluno aluno) throws SQLException {
         String sql = "INSERT INTO aluno (nome, email) VALUES (?, ?)";
-        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+        try (Connection conexao = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setString(1, aluno.getNome());
             stmt.setString(2, aluno.getEmail());
             stmt.executeUpdate();
@@ -27,7 +22,8 @@ public class AlunoDAO {
     public List<Aluno> getAlunos() throws SQLException {
         List<Aluno> usuarios = new ArrayList<>();
         String sql = "SELECT * FROM aluno";
-        try (Statement stmt = conexao.createStatement();
+        try (Connection conexao = DriverManager.getConnection(URL, USER, PASSWORD);
+             Statement stmt = conexao.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Aluno aluno = new Aluno(rs.getString("nome"), rs.getString("email"));
@@ -40,7 +36,8 @@ public class AlunoDAO {
 
     public Aluno getAlunoFromRA(int RA) throws SQLException {
         String sql = "SELECT * FROM aluno WHERE RA = ?";
-        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+        try (Connection conexao = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setInt(1, RA);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -53,10 +50,10 @@ public class AlunoDAO {
         return null;
     }
 
-
     public boolean excluir(int RA) throws SQLException {
         String sql = "DELETE FROM aluno WHERE RA = ?";
-        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+        try (Connection conexao = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setInt(1, RA);
             stmt.executeUpdate();
             return true;
