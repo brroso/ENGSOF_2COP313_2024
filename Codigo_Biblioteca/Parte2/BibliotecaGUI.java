@@ -333,8 +333,11 @@ public class BibliotecaGUI extends JFrame {
             } else {
                 try {
                     int ra = Integer.parseInt(raText);
-                    alunoController.excluirAlunoByRA(ra);
-                    JOptionPane.showMessageDialog(this, "Aluno excluído com sucesso!");
+                    if (alunoController.excluirAlunoByRA(ra)) {
+                        JOptionPane.showMessageDialog(this, "Aluno excluído com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Não foi possível excluir o Aluno.");
+                    }
                     atualizarTabelaAlunos(this.tabelaAlunos);
                     raField.setText("");
                 } catch (NumberFormatException ex) {

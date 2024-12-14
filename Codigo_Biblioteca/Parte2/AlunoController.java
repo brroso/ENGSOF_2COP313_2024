@@ -40,9 +40,9 @@ public class AlunoController {
         }
     }
 
-    public void excluirAlunoByRA(int ra){
+    public boolean excluirAlunoByRA(int ra){
         try {
-            alunoDAO.excluir(ra);
+            return alunoDAO.excluir(ra);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
